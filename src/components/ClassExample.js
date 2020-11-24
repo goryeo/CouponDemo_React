@@ -13,15 +13,14 @@ class ClassExample extends Component {
         count: 0
       };
     }
-    
-    // componentWillMount(){
-    //     document.title = this.state.count;
-    //     console.log("log: " + this.state.count);
-    // }
-    // componentDidMount(){
-    //     console.log("componentDidMount");
-    // }
-
+ 
+    componentWillMount(){
+        document.title = this.state.count;
+        console.log("log: " + this.state.count);
+    }
+    componentDidMount(){
+        console.log("componentDidMount");
+    }
     componentDidUpdate(){
         document.title = this.state.count;
     }
