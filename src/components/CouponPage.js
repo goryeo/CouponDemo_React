@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import InsCoupon from './InsCoupon';
 import Pagination from './common/Pagination';
 import { paginate } from './common/utils/paginate';
 import axios from "axios";
@@ -10,12 +11,16 @@ const CouponPage = () => {
     currentPage: 1 
   });
   
-  useEffect(() => {
+  const getCounponList = () =>{
     const apiurl = "http://localhost:8080/api/coupon/list";
     const object = { params: { pageNo:1, pageSize:10 } };
     axios
     .get(apiurl, object)
     .then(({ data }) => setCoupons(data));
+  }
+  
+  useEffect(() => {
+    getCounponList();
   }, []);
 
   const handlePageChange = (page) => {
@@ -32,14 +37,16 @@ const CouponPage = () => {
 
   return (
     <>
-      <p>{count} 개의 쿠폰 정보가 있습니다.</p>
-      <table className="table">
-        <thead>
+      <InsCoupon></InsCoupon>
+      <div className="m-3">
+      <p className="text-right font-weight-bold">Total : {count} 개</p>
+      <table className="table table-striped table-bordered table-hover text-center">
+        <thead className="thead-dark">
           <tr>
-            <th>intCouponID</th>
-            <th>strCouponNo</th>
-            <th>strEmailAddr</th>
-            <th>strRegDate</th>
+            <th>CouponID</th>
+            <th>CouponNo</th>
+            <th>EmailAddr</th>
+            <th>RegDate</th>
           </tr>
         </thead>
         <tbody>
@@ -53,6 +60,7 @@ const CouponPage = () => {
           ))}
         </tbody>
       </table>
+      </div>
       <Pagination
         pageSize={pageSize}
         itemsCount={count}
