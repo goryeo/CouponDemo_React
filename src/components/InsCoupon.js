@@ -70,6 +70,7 @@ const InsCoupon = (props) => {
         //console.log(error);
       });
   }
+  
   useEffect(() => {
     inputRef.current.focus();
   }, []);
