@@ -1,8 +1,8 @@
-import React, {useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Joi, { validate } from "joi-browser";
 import axios from "axios";
 
-function InsCoupon() {
+const InsCoupon = (props) => {
   const emailSchema = {
     strEmailAddr: Joi.string().email()
   };
@@ -10,6 +10,8 @@ function InsCoupon() {
   const [email, setEmail] = useState({
     strEmailAddr: ''
   });
+  
+  const inputRef = React.useRef(null);
 
   const handleSubmit = (e) => {
     e.preventDefault(); // 기본 동작 방지
@@ -59,12 +61,18 @@ function InsCoupon() {
     .then(function (response) {
         alert(response.data.message)
         //console.log(response.data);
+        props.onPageUpdate();
+        setEmail({ strEmailAddr: ""});
+        inputRef.current.focus();
       })
       .catch(function (error) {
         alert(error)
         //console.log(error);
       });
   }
+  useEffect(() => {
+    inputRef.current.focus();
+  }, []);
 
   return (
     <div className="m-3">
@@ -81,6 +89,8 @@ function InsCoupon() {
             type="text"
             className="form-control"
             placeholder="Email"
+            value={email.strEmailAddr}
+            ref={inputRef}
           />
         </div>
         <button 

@@ -18,7 +18,7 @@ const CouponPage = () => {
     .get(apiurl, object)
     .then(({ data }) => setCoupons(data));
   }
-  
+
   useEffect(() => {
     getCounponList();
   }, []);
@@ -29,15 +29,13 @@ const CouponPage = () => {
 
   const { couponList, pageSize, currentPage } = counpons;
   const pagedCoupons = paginate(couponList, currentPage, pageSize); // 페이지 별로 아이템이 속한 배열을 얻어옴
-
   const { length: count } = counpons.couponList;
-
-  if (count === 0) 
-    return <p>쿠폰 정보가 없습니다.</p>;
 
   return (
     <>
-      <InsCoupon></InsCoupon>
+      <InsCoupon
+        onPageUpdate={getCounponList}
+      />
       <div className="m-3">
       <p className="text-right font-weight-bold">Total : {count} 개</p>
       <table className="table table-striped table-bordered table-hover text-center">
@@ -69,7 +67,6 @@ const CouponPage = () => {
       />
     </>
   );
-
 };
 
 export default CouponPage;
