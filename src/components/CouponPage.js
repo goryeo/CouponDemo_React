@@ -10,9 +10,9 @@ const CouponPage = () => {
     pageSize: 10, 
     currentPage: 1 
   });
-  
+
   const getCounponList = () =>{
-    const apiurl = "http://localhost:8080/api/coupon/list";
+    const apiurl = "http://ec2-54-180-115-143.ap-northeast-2.compute.amazonaws.com:8080/api/coupon/list";
     const object = { params: { pageNo:1, pageSize:10 } };
     axios
     .get(apiurl, object)
@@ -28,7 +28,7 @@ const CouponPage = () => {
   };
 
   const { couponList, pageSize, currentPage } = counpons;
-  const pagedCoupons = paginate(couponList, currentPage, pageSize); // 페이지 별로 아이템이 속한 배열을 얻어옴
+  const pagedCoupons = paginate(couponList, pageSize, currentPage); // 페이지 별로 아이템이 속한 배열을 얻어옴
   const { length: count } = counpons.couponList;
 
   return (
@@ -60,8 +60,8 @@ const CouponPage = () => {
       </table>
       </div>
       <Pagination
-        pageSize={pageSize}
         itemsCount={count}
+        pageSize={pageSize}
         currentPage={currentPage}
         onPageChange={handlePageChange}
       />
