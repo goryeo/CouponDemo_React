@@ -54,7 +54,7 @@ const InsCoupon = (props) => {
 
   const handleClick = (e) => {
     e.preventDefault();
-    const apiurl = "http://ec2-54-180-150-6.ap-northeast-2.compute.amazonaws.com:8080/api/coupon/create";
+    const apiurl = "http://localhost:8080/api/coupon/create";
     const object = email;
     axios
     .post(apiurl, object)
