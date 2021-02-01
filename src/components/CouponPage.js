@@ -12,7 +12,7 @@ const CouponPage = () => {
   });
 
   const getCounponList = () =>{
-    const apiurl = "/api/coupon/list";
+    const apiurl = "http://localhost:8080/api/coupon/list";
     const object = { params: { pageNo:1, pageSize:10 } };
     axios
     .get(apiurl, object)
